@@ -1,0 +1,38 @@
+<header>
+	<h1 class="glow">Todo App</h1>
+</header>
+<form method="post" action="/create-new-task">
+	<input type="text" name="task" class="todo-input" maxlength="40" required placeholder="do it..." autocomplete="off" />
+	<button class="todo-button" type="submit">
+		<i class="fas fa-plus-square"></i>
+	</button>
+</form>
+
+{{!-- ======= div for each list =======--}}
+{{#each response}}
+<div class="todo-container" id="con">
+	<ul class="todo-list">
+		{{#if this.completed}}
+		<div class="todo completed">
+			<li class="todo-item">{{this.task}}</li>
+			<a href="/complete-task/{{this._id}}" class="check-btn">
+				<i class="fas fa-check" aria-hidden="true"></i>
+			</a>
+			<a href="/delete-task/{{this._id}}" type="button" class="trash-btn">
+				<i class="fas fa-trash" aria-hidden="true"></i>
+			</a>
+		</div>
+		{{else}}
+		<div class="todo">
+			<li class="todo-item">{{this.task}}</li>
+			<a href="/complete-task/{{this._id}}" class="check-btn">
+				<i class="fas fa-check" aria-hidden="true"></i>
+			</a>
+			<a type="button" class="trash-btn" href="/delete-task/{{this._id}}">
+				<i class="fas fa-trash" aria-hidden="true"></i>
+			</a>
+		</div>
+		{{/if}}
+	</ul>
+</div>
+{{/each}}
